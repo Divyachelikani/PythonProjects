@@ -1,0 +1,40 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Information</h1>
+        <form method="POST" action="/">
+            <label for="student_id">Student ID:</label>
+            <input type="text" id="student_id" name="student_id" required>
+            <label for="course">Course Name:</label>
+            <input type="text" id="course" name="course" required>
+            <label for="action">Action:</label>
+            <select id="action" name="action">
+                <option value="enroll">Enroll</option>
+                <option value="drop">Drop</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        {% if student %}
+            <h2>Courses for Student ID: {{ student.student_id }}</h2>
+            <ul>
+                {% for course in student.courses %}
+                    <li>{{ course }}</li>
+                {% endfor %}
+            </ul>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
